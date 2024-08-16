@@ -1,0 +1,292 @@
+<mvc:View
+	controllerName="ypf.zlog66freeld4.controller.UTDetail"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:u="sap.uxap"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+	xmlns:card="sap.f.cards"
+	displayBlock="true"
+	height="100%">
+    <u:ObjectPageLayout>    
+		<u:headerTitle>
+			<u:ObjectPageDynamicHeaderTitle>
+				<u:expandedHeading>
+					<Title text="{i18n>UTDetailTitle}" wrapping="true" />
+				</u:expandedHeading>
+				<u:snappedHeading>
+					<HBox>
+                        <VBox>
+							<Avatar src="{i18n>iconUT}" class=""/>
+						</VBox>
+						<VBox>
+                            <Title text="{i18n>UTDetailTitle}" wrapping="true"/>
+                            <ObjectStatus text="{i18n>labelUTNumber}: {UTModel>/TUNumber} - {UTModel>/TUText}"/>
+                        </VBox>
+                    </HBox>
+				</u:snappedHeading>
+				<u:expandedContent>
+                    <ObjectStatus text="{i18n>labelUTNumber}: {UTModel>/TUNumber} - {UTModel>/TUText}"/>
+				</u:expandedContent>
+				<u:snappedTitleOnMobile>
+					<Title text="{i18n>UTDetailTitle} {UTModel>/TUNumber} - {UTModel>/TUText}"/>
+				</u:snappedTitleOnMobile>
+				<u:actions>
+					<u:ObjectPageHeaderActionButton icon="sap-icon://nav-back" type="Transparent" press="onNavToTablesView"/>
+				</u:actions>
+			</u:ObjectPageDynamicHeaderTitle>
+		</u:headerTitle> 
+		<u:headerContent>
+			<FlexBox wrap="Wrap" fitContainer="true" justifyContent="SpaceBetween">
+                
+                <Avatar src="{i18n>iconUT}" class="" displaySize="XL"/>
+
+                <VBox class="sapUiSmallMarginBottom">
+                    <Title text="{i18n>UTHeaderInfo}" class="sapUiTinyMarginBottom"/>
+
+                    <HBox class="sapUiTinyMarginBottom" renderType="Bare">
+                        <Label text="{i18n>labelUTType}" class="sapUiTinyMarginEnd"/>
+                        <ObjectStatus text="{UTModel>/TUType} - {UTModel>/VehTypeText}"/>
+                    </HBox>
+
+                    <HBox class="sapUiTinyMarginBottom" renderType="Bare">
+                        <Label text="{i18n>labelUTMode}" class="sapUiTinyMarginEnd"/>
+                        <ObjectStatus text="{path: 'UTModel>/TUMode', formatter: '.formatter.setTransportMode'}"/>
+                    </HBox>
+
+                    <VBox width="15.625rem" height="5rem">
+                        <Label text="{i18n>labelUTClass}" class="sapUiTinyMarginEnd"/>
+                        <ObjectStatus text="{path: 'UTModel>/TUClass', formatter: '.formatter.UT_setClass'}"/>
+                    </VBox>
+                </VBox>
+                <VBox class="sapUiLargeMarginEnd sapUiSmallMarginTop">
+                    <Label  text="{i18n>labelUTText}" class="sapUiTinyMarginBottom" />
+                    <Text  width="320px" text="{UTModel>/TUText}"/>
+                </VBox>
+                <VBox class="sapUiLargeMarginEnd sapUiSmallMarginTop">
+                    <HBox >
+                        <Label text="{i18n>labelUTCreName}" class="sapUiSmallMarginEnd"/>
+                        <Text text="{UTModel>/CreName}"/>
+                    </HBox>
+
+                    <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop">
+                        <Label text="{i18n>labelUTCreDate}" class="sapUiSmallMarginEnd"/>
+                        <Text text="{UTModel>/CreDate}"/>
+                    </HBox>
+                </VBox>
+                <HBox fitContainer="true" class="sapUiTinyMarginBegin" justifyContent="SpaceBetween" width="100%">
+                    <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+                        <Label text="{i18n>labelUTStatus}" class="sapUiTinyMarginBottom"/>
+                        <ObjectStatus text="{path: 'UTModel>/TUStatus', formatter: '.formatter.UT_setAvailabilityText'}" state="{path: 'UTModel>/TUStatus', formatter: '.formatter.UT_setAvailabilityState'}" class="sapMObjectStatusLarge"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom" >
+                        <VBox >
+                            <Label text="{i18n>labelUTCompMar}" class="sapUiTinyMarginBottom" />
+                            <ObjectStatus text="{UTModel>/CompMar}" class="sapMObjectStatusLarge"/>
+                        </VBox>
+                    </VBox>
+                    <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                        <Label text="{i18n>labelUTCompMod}" class="sapUiTinyMarginBottom" />
+                        <ObjectStatus text="{UTModel>/CompMod}" class="sapMObjectStatusLarge"/>
+                    </VBox>
+
+                    <VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                        <Label text="{i18n>labelUTPot}" class="sapUiTinyMarginBottom" />
+                        <ObjectStatus text="{UTModel>/Pot}" class="sapMObjectStatusLarge"/>
+                    </VBox>
+
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="{i18n>labelUTCarrier}" class="sapUiTinyMarginBottom" />
+                        <ObjectStatus text="{UTModel>/TUCarrier}" class="sapMObjectStatusLarge"/>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginEnd">
+                        <Label text="{i18n>labelUTNroComps}" class="sapUiTinyMarginBottom" />
+                        <ObjectStatus text="{UTModel>/TUNrcomps}" class="sapMObjectStatusLarge"/>
+                    </VBox>
+                </HBox>
+            </FlexBox>
+		</u:headerContent>
+		<u:sections>
+			<!--Cards información-->
+			<u:ObjectPageSection>
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>UTSubsection1Title}" titleUppercase="false">
+                        <HBox alignItems="Center" justifyContent="SpaceBetween">
+                        <!-- Card Info Vehiculo -->
+                            <f:Card class="sapUiSmallMargin" width="31.25rem" height="22.5rem"> 
+                                <f:header>
+                                    <card:Header iconSrc="sap-icon://car-rental" title="{i18n>UTVehiculoCardTitle}" subtitle="{i18n>labelUTNumber}: {UTModel>/TUNumber}" />
+                                </f:header>
+                                <f:content>
+                                    <HBox alignItems="Center" justifyContent="SpaceBetween" width="98%" height="auto">
+                                        <VBox width="49%" height="auto">
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTSegCent}:" />
+                                                <ObjectStatus text="{path: 'UTModel>/SegCent', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTModel>/SegCent', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTCompCh}:" />
+                                                <ObjectStatus text="{UTModel>/CompCh}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTCompMot}:" class=""/>
+                                                <ObjectStatus text="{UTModel>/CompMot}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTCargaVent}:" class=""/>
+                                                <ObjectStatus text="{path: 'UTModel>/CARGA_VENT', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTModel>/CARGA_VENT', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                        </VBox>
+                                        <VBox width="49%" height="auto">
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTEuro5}:" />
+                                                <ObjectStatus text="{path: 'UTModel>/Euro5', formatter: '.formatter.formatStringBooleansToText'}" class="sapMObjectStatusMedium " state="{path: 'UTModel>/Euro5', formatter: '.formatter.formatStringBooleansToState'}"/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTSistFren}:" />
+                                                <ObjectStatus text="{path: 'UTModel>/SistFren', formatter: '.formatter.formatStringBooleansToText'}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTBombTrans}:" class=""/>
+                                                <ObjectStatus text="{path: 'UTModel>/BombTrans', formatter: '.formatter.formatStringBooleansToText'}" class="sapMObjectStatusMedium" state="{path: 'UTModel>/BombTrans', formatter: '.formatter.formatStringBooleansToState'}"/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTAudtanNr}:" class=""/>
+                                                <ObjectStatus text="{UTModel>/AudtanNr}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                        </VBox>
+                                    </HBox>
+                                </f:content>
+                            </f:Card>
+                        <!-- Card Mediciones -->
+                            <f:Card class="sapUiSmallMargin" width="31.25rem" height="22.5rem">
+                                <f:header>
+                                    <card:Header iconSrc="sap-icon://compare" title="{i18n>UTTransporteCardTitle}" subtitle="{i18n>labelUTNumber}: {UTModel>/TUNumber}" />
+                                </f:header>
+                                <f:content>
+                                    <HBox alignItems="Center" justifyContent="SpaceBetween" width="98%" height="auto">
+                                        <VBox width="49%" height="auto">
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTLenght}:" />
+                                                <ObjectStatus text="{UTModel>/TULength} {UTModel>/DimUom}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTWidth}:" />
+                                                <ObjectStatus text="{UTModel>/TUWidth} {UTModel>/DimUom}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTHeight}:" class=""/>
+                                                <ObjectStatus text="{UTModel>/TUHeight} {UTModel>/DimUom}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTAxles}:" class=""/>
+                                                <ObjectStatus text="{UTModel>/TUAxles}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTImag}:" class=""/>
+                                                <ObjectStatus text="{path: 'UTModel>/Imag', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTModel>/Imag', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                        </VBox>
+                                        <VBox width="49%" height="auto">
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTUnlwgt}:" />
+                                                <ObjectStatus text="{UTModel>/TUUnlwgt} {UTModel>/WgtUom}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTMaxWgt}:" />
+                                                <ObjectStatus text="{UTModel>/TUMaxwgt} {UTModel>/WgtUom}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTMaxVol}:" class=""/>
+                                                <ObjectStatus text="{UTModel>/TUMaxvol} {UTModel>/VolUom}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTPrecFijo}:" class=""/>
+                                                <ObjectStatus text="{path: 'UTModel>/PrecFijo', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTModel>/PrecFijo', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                            <HBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" justifyContent="SpaceBetween">
+                                                <Label text="{i18n>labelUTPrecElect}:" class=""/>
+                                                <ObjectStatus text="{path: 'UTModel>/PrecElect', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTModel>/PrecElect', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium "/>
+                                            </HBox>
+                                        </VBox>
+                                    </HBox>
+                                </f:content>
+                            </f:Card>
+                        </HBox>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+            </u:ObjectPageSection>
+
+            <u:ObjectPageSection>
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>UTSubsection2Title}" titleUppercase="false">
+                        <HBox alignItems="Center" justifyContent="SpaceBetween">
+                        <!--Card Compartimentos-->
+                            <f:Card class="sapUiSmallMargin" width="32rem" height="35rem">
+                                <f:header>
+                                    <card:Header iconSrc="sap-icon://inventory" title="{i18n>UTCompartimentoCardTitle}" subtitle="{i18n>labelUTNumber}: {UTModel>/TUNumber}" />
+                                </f:header>
+                                <f:content>
+                                    <ScrollContainer height='100%' width='100%' vertical='true'>
+                                    <List items="{UTModel>/Compartimentos}" >
+                                        <ObjectListItem
+                                            title="{i18n>UTDetailCompartimentoComNumber}: {UTModel>COM_NUMBER}">
+                                            <firstStatus>
+                                                <ObjectStatus text="{i18n>UTDetailCompartimentoGroupName}: {UTModel>Groupname}"/>
+                                            </firstStatus>
+                                            <secondStatus>
+                                                <ObjectStatus text="{i18n>UTDetailCompartimentoComIdtext}: {UTModel>ComIdtext}"/>
+                                            </secondStatus>
+                                            <ObjectAttribute text="{i18n>UTDetailCompartimentoCmpMinVol}: {UTModel>CmpMinvol} {UTModel>/VolUom}" />
+                                            <ObjectAttribute text="{i18n>UTDetailCompartimentoCmpMaxvol}: {UTModel>CmpMaxvol} {UTModel>/VolUom}" />
+                                        </ObjectListItem>
+                                    </List>
+                                    </ScrollContainer>
+                                </f:content>
+                            </f:Card>
+                            <!--Card Habilitaciones-->
+                            <f:Card class="sapUiSmallMargin" width="32rem" height="35rem">
+                                <f:header>
+                                    <card:Header iconSrc="sap-icon://form" title="{i18n>UTHabilitacionCardTitle}" subtitle="{i18n>labelUTNumber}: {UTModel>/TUNumber}" />
+                                </f:header>
+                                <f:content>
+                                    <ScrollContainer height='100%' width='100%' vertical='true'>
+                                    <List items="{UTModel>/Habilitaciones}"
+                                    growing="true"
+				                    growingScrollToLoad="true">
+                                        <ObjectListItem
+                                            title="{i18n>UTDetailHabilitacionCampo}: {UTModel>Campo}">
+                                            <!-- <firstStatus>
+                                                <ObjectStatus text="{i18n>labelUTFechaDesdeItc1}: {UTModel>FechaDesdeItc1}"/>
+                                            </firstStatus> -->
+                                            <firstStatus>
+                                                <ObjectStatus 
+                                                
+                                                    text="{UTModel>labelVencimiento}: {UTModel>Vencimiento}"
+                                                    class="sapMObjectStatusMedium"
+                                                    state="{path: 'UTModel>Vencimiento', formatter: '.formatter.isDateExpired'}"/>
+                                            </firstStatus>
+                                            <ObjectAttribute text="{i18n>UTDetailHabilitacionDescripcion}: {UTModel>Descripcion}" />
+                                            <ObjectAttribute text="{ 
+                                                parts: [
+                                                    {path: 'i18n>UTDetailHabilitacionFechaDesde'},
+                                                    {path: 'UTModel>labelFechaDesde'},
+                                                    {path: 'UTModel>FechaDesde'}
+                                                ],
+                                                formatter: '.formatter.detailFechaDesde'
+                                            }" />
+                                            
+                                            
+                                        </ObjectListItem>                                                    
+                                    </List>
+                                    </ScrollContainer>
+                                </f:content>
+                            </f:Card>
+                        </HBox>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+            </u:ObjectPageSection>
+		</u:sections>
+	</u:ObjectPageLayout> 
+</mvc:View>

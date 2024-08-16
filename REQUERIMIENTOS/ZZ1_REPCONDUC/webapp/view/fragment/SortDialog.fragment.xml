@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		id="sortDialog"
+		confirm="onSortDriverTableConfirm">
+		<sortItems>
+			<ViewSettingsItem text="{i18n>labelDriverCode}" key="{i18n>idDriverCode}" selected="true"  />
+            <ViewSettingsItem text="{i18n>labelLicenseType}" key="{i18n>idLicenseType}" />
+			<!-- <ViewSettingsItem text="Fecha De Envio" key="FechaEnvio" /> -->
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

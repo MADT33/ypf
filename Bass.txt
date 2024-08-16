@@ -1,0 +1,33 @@
+Sap Bas
+Número de solicitud: 
+REQ0930557   
+
+se41390@grupo.ypf.com
+
+Ma3sr7i-tO39V2
+REPOSITORIO
+https://dev.azure.com/Azure-DevOps-YPF/CENIT
+
+video repo
+https://www.youtube.com/watch?v=eGMlYkzeCWs&ab_channel=ULearnGt
+
+CAU
+https://ypf.service-now.com/
+
+
+p:SAPServiceLM4/grupo.ypf.com@GRUPO.YPF.COM
+
+
+SAP BASS
+"rodolfo.m.ditoro@set.ypf.com"
+
+https://ycpsdclfapp001.authentication.us10.hana.ondemand.com/login
+
+
+
+https://emea.cockpit.btp.cloud.sap/cockpit/?idp=a0qtupv0u.accounts.ondemand.com#/globalaccount/CA814642TID000000000741314534/subaccount/dc88b2f2-edcd-4259-a54d-4faefc4c6d1b
+
+buenas practicas
+https://ypf.sharepoint.com.mcas.ms/teams/GrupodeSolucionesSAP-SolucionesyDesarrollo/Documentos%20compartidos/Forms/AllItems.aspx?csf=1&web=1&e=CQaIZx&cid=d234cdd3%2D4d54%2D4d98%2D936e%2D62a47ab8ce7b&RootFolder=%2Fteams%2FGrupodeSolucionesSAP%2DSolucionesyDesarrollo%2FDocumentos%20compartidos%2FBuenas%20Practicas%2C%20Metodolog%C3%ADa%20y%20Procedimientos%20SAP%2FBuenas%20Practicas&FolderCTID=0x012000E4E16922F76D5546AA30C1672F182921
+
+https://ypf.sharepoint.com/:f:/r/teams/GrupodeSolucionesSAP-SolucionesyDesarrollo/Documentos%20compartidos/Buenas%20Practicas,%20Metodolog%C3%ADa%20y%20Procedimientos%20SAP/Buenas%20Practicas?csf=1&web=1&e=CQaIZx

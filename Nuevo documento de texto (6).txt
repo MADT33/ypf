@@ -1,0 +1,39 @@
+
+editable="{LoteModel>/LoteFlag/editable}" 
+
+
+
+ this.fragmento = sap.ui.xmlfragment("ypf.zz1balanzaquimlubesasfalto.fragments.cargaManualFinalViaje", this);
+                this.getView().addDependent(this.fragmento);
+
+                var oColums = sap.ui.getCore().byId("idTable").getItems("cells"); 
+
+                for (let i = 0; i < oColums.length; i++) {
+                    var oItems = oColums[i].mAggregations.cells[4];
+
+                    for (let j = 0; j < AlnacenModel.length; j++) {
+                        const flag = AlnacenModel[j].LoteFlag;
+                       
+                        switch (flag) {
+                            case "H":
+                                //oItems.setEditable(true);
+                                sap.ui.getCore().byId("idTable").getItems()[1].mAggregations.cells[4].setEditable(true)
+                               // console.log(oItems.getEditable())
+                                //console.log(flag)
+                                break;
+                            case "G":
+                                oItems.setEditable(false);
+                               
+                                console.log(oItems.getEditable())
+                                console.log(flag)
+                                break;
+                               
+                            default:
+                                oItems.setEditable(true);
+                                console.log("esto anda para el orto");
+                        }
+                    }
+                }
+                this.fragmento.open();
+            },
+            VerPosiciones: function () {

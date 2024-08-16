@@ -1,0 +1,19 @@
+ "pages": {
+      "ListReport|PesadaBalanza": {
+        "entitySet": "PesadaBalanza",
+        "component": {
+          "name": "sap.suite.ui.generic.template.ListReport",
+          "list": true,
+          "settings": {           
+            "tableSettings": {
+              "type": "GridTable",             
+              "multiSelect": false},
+            "condensedTableLayout": true,
+            "smartVariantManagement": true,
+            "enableTableFilterInPageVariant": true,
+            "filterSettings": {
+              "dateSettings": {
+                "useDateRange": true
+              }
+            }
+          }

@@ -1,0 +1,12 @@
+
+tabla tabla ICFSERVICE
+
+App
+/sap/bc/ui5_ui5/sap/ZZ1_LOG701
+Servicios
+/sap/opu/odata/sap/ZUI_CERTIF_VINICULTURA_V2/
+
+
+nuevas app 
+OT 
+LM4K901705 200   RY34912      S 7000005333: PRD-F2-Activación aplicaciones  en Fiori.

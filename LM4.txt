@@ -1,0 +1,260 @@
+class ZCL_ZGW_BALANZA_QUI_LU_MPC definition
+  public
+  inheriting from /IWBEP/CL_MGW_PUSH_ABS_MODEL
+  create public .
+
+public section.
+
+  types:
+  begin of TS_BQ_PESADAINICIAL,
+     NUM_TRANSPORTE type string,
+     POSICION type string,
+     CLASE_TRANSPORTE type string,
+     ESTADO type string,
+     PESO type string,
+     UNIDAD_MEDIDA type string,
+     BALANZA type string,
+     TIPO_PESADA type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+  end of TS_BQ_PESADAINICIAL .
+  types TYT_CIERRE_DE_VIAJE .
+  types:
+TT_BQ_PESADAINICIAL type standard table of TS_BQ_PESADAINICIAL .
+  types:
+   begin of ts_text_element,
+      artifact_name  type c length 40,       " technical name
+      artifact_type  type c length 4,
+      parent_artifact_name type c length 40, " technical name
+      parent_artifact_type type c length 4,
+      text_symbol    type textpoolky,
+   end of ts_text_element .
+  types:
+         tt_text_elements type standard table of ts_text_element with key text_symbol .
+  types:
+  begin of TS_BQ_IFIX_INICIAL,
+     NUM_TRANSPORTE type string,
+     POSICION type string,
+     CLASE_TRANSPORTE type string,
+     ESTADO type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+  end of TS_BQ_IFIX_INICIAL .
+  types:
+TT_BQ_IFIX_INICIAL type standard table of TS_BQ_IFIX_INICIAL .
+  types:
+  begin of TS_BQ_IFIX_FINAL,
+     NUM_TRANSPORTE type string,
+     POSICION type string,
+     CLASE_TRANSPORTE type string,
+     ESTADO type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+  end of TS_BQ_IFIX_FINAL .
+  types:
+TT_BQ_IFIX_FINAL type standard table of TS_BQ_IFIX_FINAL .
+  types:
+  begin of TS_BQ_PESADAFINAL,
+     NUM_TRANSPORTE type string,
+     POSICION type string,
+     CLASE_TRANSPORTE type string,
+     ESTADO type string,
+     PESO type string,
+     UNIDAD_MEDIDA type string,
+     BALANZA type string,
+     TIPO_PESADA type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+  end of TS_BQ_PESADAFINAL .
+  types:
+TT_BQ_PESADAFINAL type standard table of TS_BQ_PESADAFINAL .
+  types:
+  begin of TS_CIERRE_DE_VIAJE,
+     NUM_TRANSPORTE type string,
+     ALMACEN type string,
+     CLASE_TRANSPORTE type string,
+     ESTADO type string,
+     PESO type string,
+     UNIDAD_MEDIDA type string,
+     BALANZA type string,
+     TIPO_PESADA type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+     POSICION type string,
+     LOTE type string,
+     LOTEFLAG type string,
+  end of TS_CIERRE_DE_VIAJE .
+  types:
+TT_CIERRE_DE_VIAJE type standard table of TS_CIERRE_DE_VIAJE .
+  types:
+  begin of TS_PRECINTOS,
+     NUM_TRANSPORTE type string,
+     CISTERNA type string,
+     PRECINTO_INI type string,
+     PRECINTO_FIN type string,
+  end of TS_PRECINTOS .
+  types:
+TT_PRECINTOS type standard table of TS_PRECINTOS .
+  types:
+  begin of TS_POSICIONES,
+     NUM_TRANSPORTE type string,
+     POSICION_TRANSPORTE type string,
+     ENTREGA type string,
+     POSICION_ENTREGA type string,
+     CODIGO_MATERIAL type string,
+     DES_MATERIAL type string,
+     CANTIDAD_ENTREGA type string,
+     UNIDAD_MEDIDA type string,
+     PESO_TARA type string,
+     PESO_NETO type string,
+     PESO_FINAL type string,
+     BALANZA_CARGA type string,
+     STATUS_PROCESADO type string,
+  end of TS_POSICIONES .
+  types:
+TT_POSICIONES type standard table of TS_POSICIONES .
+  types:
+  begin of TS_BLYA_PESO_INICIAL,
+     NUM_TRANSPORTE type string,
+     POSICION type string,
+     PESO type string,
+     UNIDAD_MEDIDA type string,
+     BALANZA type string,
+     TIPO_PESADA type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+  end of TS_BLYA_PESO_INICIAL .
+  types:
+TT_BLYA_PESO_INICIAL type standard table of TS_BLYA_PESO_INICIAL .
+  types:
+  begin of TS_BLYA_PESO_FINAL,
+     NUM_TRANSPORTE type string,
+     POSICION type string,
+     PESO type string,
+     UNIDAD_MEDIDA type string,
+     BALANZA type string,
+     TIPO_PESADA type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+  end of TS_BLYA_PESO_FINAL .
+  types:
+TT_BLYA_PESO_FINAL type standard table of TS_BLYA_PESO_FINAL .
+  types:
+  begin of TS_BLYA_CIERRE_VIAJE,
+     NUM_TRANSPORTE type string,
+     ALMACEN type string,
+     STATUS type string,
+     MSG_RESULTADO type string,
+     HABILITAR_PASOS type string,
+     POSICION type string,
+  end of TS_BLYA_CIERRE_VIAJE .
+  types:
+TT_BLYA_CIERRE_VIAJE type standard table of TS_BLYA_CIERRE_VIAJE .
+  types:
+  begin of TS_CONSULTAALMACEN,
+     NUM_TRANSPORTE type string,
+     ALMACEN type string,
+     POSICION_ENTREGA type string,
+     CODIGO_MATERIAL type string,
+     DES_MATERIAL type string,
+     LOTE type string,
+     LOTEFLAG type string,
+  end of TS_CONSULTAALMACEN .
+  types:
+TT_CONSULTAALMACEN type standard table of TS_CONSULTAALMACEN .
+  types:
+  begin of TS_HEADER,
+     KEY type string,
+  end of TS_HEADER .
+  types:
+TT_HEADER type standard table of TS_HEADER .
+  types:
+  begin of TS_BALANZA,
+     NUM_TRANSPORTE type string,
+     FECHA type string,
+     HORA type string,
+     TRANSPORTE type string,
+     PERMISO_EMBARQUE type string,
+     ERRORES type string,
+     BAL_QUIMICA type string,
+     TRANSPORTISTA type string,
+     CODIGO_TRANS type string,
+     VEHICLE type string,
+     PATENTE_ACOPLADO type string,
+     TOLERANCIA_MIN type string,
+     TOLERANCIA_MAX type string,
+     ESTADO_PESO_INI type string,
+     ESTADO_FIX_MASICO type string,
+     ESTADO_IFIX_DESPACHO type string,
+     ESTADO_PESO_FINAL type string,
+     ESTADO_CIERRE type string,
+     HABENV_PESO_INI type string,
+     HABENV_FIX_MASICO type string,
+     HABENV_IFIX_DESPACHO type string,
+     HABENV_PESO_FINAL type string,
+     HABENV_CIERRE type string,
+     PESO_TARA type string,
+     PESO_FINAL type string,
+  end of TS_BALANZA .
+  types:
+TT_BALANZA type standard table of TS_BALANZA .
+  types:
+  begin of TS_TABLAIFIXMOSICO,
+     NUM_TRANSPORTE type string,
+     CONDUCTOR type string,
+     PATENTE type string,
+     CODIP type string,
+     PRODUCTO type string,
+     VOLUMEN type string,
+     PICO type string,
+     MENSAJE type string,
+  end of TS_TABLAIFIXMOSICO .
+  types:
+TT_TABLAIFIXMOSICO type standard table of TS_TABLAIFIXMOSICO .
+  types:
+  begin of TS_TABLAIFIXDESPACHO,
+     NUM_TRANSPORTE type string,
+     PRODUCTO type string,
+     MEDMASICO type string,
+     TEMPMASICO type string,
+     DEMSMASICO type string,
+     FECHAINI type string,
+     HORAINI type string,
+  end of TS_TABLAIFIXDESPACHO .
+  types:
+TT_TABLAIFIXDESPACHO type standard table of TS_TABLAIFIXDESPACHO .
+
+  constants GC_BALANZA type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'Balanza' ##NO_TEXT.
+  constants GC_BLYA_CIERRE_VIAJE type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BLYA_Cierre_Viaje' ##NO_TEXT.
+  constants GC_BLYA_PESO_FINAL type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BLYA_Peso_Final' ##NO_TEXT.
+  constants GC_BLYA_PESO_INICIAL type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BLYA_Peso_Inicial' ##NO_TEXT.
+  constants GC_BQ_IFIX_FINAL type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BQ_Ifix_Final' ##NO_TEXT.
+  constants GC_BQ_IFIX_INICIAL type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BQ_Ifix_Inicial' ##NO_TEXT.
+  constants GC_BQ_PESADAFINAL type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BQ_PesadaFinal' ##NO_TEXT.
+  constants GC_BQ_PESADAINICIAL type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'BQ_PesadaInicial' ##NO_TEXT.
+  constants GC_CIERRE_DE_VIAJE type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'Cierre_de_Viaje' ##NO_TEXT.
+  constants GC_CONSULTAALMACEN type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'ConsultaAlmacen' ##NO_TEXT.
+  constants GC_HEADER type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'Header' ##NO_TEXT.
+  constants GC_POSICIONES type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'Posiciones' ##NO_TEXT.
+  constants GC_PRECINTOS type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'Precintos' ##NO_TEXT.
+  constants GC_TABLAIFIXDESPACHO type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'TablaIfixDespacho' ##NO_TEXT.
+  constants GC_TABLAIFIXMOSICO type /IWBEP/IF_MGW_MED_ODATA_TYPES=>TY_E_MED_ENTITY_NAME value 'TablaIfixMosico' ##NO_TEXT.
+
+  methods LOAD_TEXT_ELEMENTS
+  final
+    returning
+      value(RT_TEXT_ELEMENTS) type TT_TEXT_ELEMENTS
+    raising
+      /IWBEP/CX_MGW_MED_EXCEPTION .
+
+  methods DEFINE
+    redefinition .
+  methods GET_LAST_MODIFIED
+    redefinition .

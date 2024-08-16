@@ -1,0 +1,14 @@
+<mvc:View
+    controllerName="ypf.zlog12freeld4.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+                <mvc:XMLView id="driverTable" viewName="ypf.zlog12freeld4.view.DriverTable" async="true"/>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -1,0 +1,1825 @@
+<mvc:View
+	controllerName="ypf.zlog66freeld4.controller.UTTable"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:commons="sap.suite.ui.commons"
+    xmlns:layout="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:u="sap.ui.unified"
+    xmlns:variant="sap.ui.comp.variants"
+	displayBlock="true"
+	height="100%">
+    <f:DynamicPage
+        id="dynamicPageId"
+		stickySubheaderProvider="iconTabBar"
+		headerExpanded="false"
+		class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+				<f:heading>
+					<variant:VariantManagement 
+                        variantItems="{/Variants}" 
+                        select="onSelectVariant" 
+                        save="onSaveAsVariant" 
+                        enabled="true" 
+                        lifecycleSupport="true"
+                        manage="onManageVariant" 
+                        showExecuteOnSelection="false"
+                        showSetAsDefault="false" 
+                        id="variantManagement" >
+                            <variant:variantItems>
+                                <variant:VariantItem text="{Name}" key="{Key}" author="{User}"/>
+                            </variant:variantItems>
+                    </variant:VariantManagement>
+				</f:heading>
+				<f:expandedContent>
+					<Label text="{i18n>listsLabelSubtitle}"/>
+				</f:expandedContent>
+				<f:snappedContent>
+					<Label text="{i18n>listsLabelSubtitle}"/>
+				</f:snappedContent>
+				<f:snappedTitleOnMobile>
+					<Title text="{i18n>listsPage}"/>
+				</f:snappedTitleOnMobile>
+				<f:content>
+                    
+				</f:content>
+			</f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <fb:FilterBar 
+                    id="filterbar"
+                    showRestoreOnFB="true" 
+                    showFilterConfiguration="true" 
+                    reset="onResetFilterBar" 
+                    useToolbar="false" 
+                    showGoOnFB="false" 
+                    class="sapUiResponsiveMargin">
+                        <fb:filterGroupItems>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="Carrier" label="{i18n>labelFilterCarrier}" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slCarrier"
+                                    selectionChange="onSelectChangeCarrier"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_TU_CARRIER',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'Name' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>Carrier}" text="{UTsModel>Carrier} - {UTsModel>Name}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="TUNumber" label="{i18n>labelFilterTUNumber}" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slTUNumber"
+                                    selectionChange="onSelectChangeTUNumber"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_TU_NUMBER',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'TUNumber' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>TUNumber}" text="{UTsModel>TUNumber}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="TuStatus" label="{i18n>labelFilterTuStatus}" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slTuStatus"
+                                    selectionChange="onSelectChangeTuStatus"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_TU_STATUS',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'Descripcion' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>Status}" text=" {UTsModel>Status} - {UTsModel>Descripcion}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="TuType" label="{i18n>labelFilterTuType}" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slTuType"
+                                    selectionChange="onSelectChangeTuType"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_TU_TYPE',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'TuType' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>TuType}" text="{UTsModel>TuType} - {UTsModel>TuTypeText}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="GrpName" label="{i18n>labelFilterGrpName}" visibleInFilterBar="false">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slGrpName"
+                                    selectionChange="onSelectChangeGroup"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_GROUPNAME',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'GroupName' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>GroupName}" text="{UTsModel>GroupName} - {UTsModel>GroupText}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="SegCent" label="{i18n>labelFilterSegCent}" visibleInFilterBar="false">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slSegCent"
+                                    selectionChange="onSelectChangeSegCent"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_SEG_CENT',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'SegCent' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>SegCent}" text="{UTsModel>SegCentText}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="OpCif" label="{i18n>labelFilterOpCif}" visibleInFilterBar="false">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slOpCif"
+                                    selectionChange="onSelectChangeOpCif"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_OP_CIF',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'OpCif' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>OpCif}" text="{UTsModel>OpCifText}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="Euro5" label="{i18n>labelFilterEuro5}" visibleInFilterBar="false">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slEuro5"
+                                    selectionChange="onSelectChangeEuro5"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_EURO_5',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'Euro5' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>Euro5}" text="{UTsModel>Euro5Text}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="Escal" label="{i18n>labelFilterEscal}" visibleInFilterBar="false">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="slEscal"
+                                    selectionChange="onSelectChangeEscal"
+                                    items="{
+                                        path: 'UTsModel>/ZC_SH_ESCAL',
+                                        length: 6000,
+                                        templateShareable:false,
+                                        sorter: { path: 'Escal' }
+                                    }">
+                                    <c:ListItem key="{UTsModel>Escal}" text="{UTsModel>EscalText}" additionalText=""/>
+                                </MultiComboBox>
+                            </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="VtoMas" label="{i18n>labelDateRangeVtoMas}" visibleInFilterBar="false">
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="dateRangeSelectorVtoMas"
+                                        showFooter="true"
+                                        change="onFilterBTDatesVtoMas"/>
+                                </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="VtoItc1" label="{i18n>labelDateRangeVtoItc1}" visibleInFilterBar="false">
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="dateRangeSelectorVtoItc1"
+                                        showFooter="true"
+                                        change="onFilterBTDatesVtoItc1"/>
+                                </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="VtoItc2" label="{i18n>labelDateRangeVtoItc2}" visibleInFilterBar="false">
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="dateRangeSelectorVtoItc2"
+                                        showFooter="true"
+                                        change="onFilterBTDatesVtoItc2"/>
+                                </fb:control>				
+                        </fb:FilterGroupItem>
+                        <fb:FilterGroupItem groupName="Opciones" groupTitle="{i18n>filterBarGroupName}" name="VtoItc3" label="{i18n>labelDateRangeVtoItc3}" visibleInFilterBar="false">
+                                <fb:control>
+                                    <DateRangeSelection
+                                        id="dateRangeSelectorVtoItc3"
+                                        showFooter="true"
+                                        change="onFilterBTDatesVtoItc3"/>
+                                </fb:control>				
+                        </fb:FilterGroupItem>
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+        <IconTabBar
+            id="iconTabBar"
+            select=".onTabBarSelect"
+            stretchContentHeight="true"
+            applyContentPadding="true"
+            class="sapUiNoContentPadding"
+            expandable="false">
+            <items>
+                <IconTabFilter
+                    id="btnTotales"
+                    key="T"
+                    text="Todos"/>
+                <IconTabFilter
+                    id="btnGenerales"
+                    key="G"
+                    text="Información General"/>
+                <IconTabFilter
+                    id="btnCompartimentos"
+                    key="C"
+                    text="Compartimentos"/>
+                <IconTabFilter
+                    id="btnAtributos"
+                    key="A"
+                    text="Atributos"/>
+                <IconTabFilter
+                    id="btnSeguros"
+                    key="S"
+                    text="Seguros"/>
+                <IconTabFilter
+                    id="btnHabilitaciones"
+                    key="H"
+                    text="Habilitaciones"/>
+            </items>
+            <content>
+                <t:Table
+                    id="idTableUT"
+                    rows="{UTsModel>/ZI_REP_UNIT_TRAN}"
+                    selectionMode="None"
+                    enableColumnReordering="false"
+                    visibleRowCountMode="Auto"
+                    threshold="6000"
+                    cellClick="onCellClick"
+                    rowSelectionChange="onSelectionChange"
+                    enableBusyIndicator="true">
+                    <t:extension>
+                        <OverflowToolbar design="Transparent">
+                            <ToolbarSpacer/>
+                            <Button id="dwbtn1"
+                                        icon="sap-icon://download"
+                                        tooltip="{i18n>ExcelDownloadTooltip}"
+                                        press="onDownloadExcelTable"
+                                        type="Transparent"/>
+                            <OverflowToolbarButton icon="sap-icon://sort" tooltip="Ordenar" type="Transparent" press="onSortOpen"/> 
+                            <OverflowToolbarButton icon="sap-icon://action-settings" tooltip="{i18n>persoControllerTooltip}" type="Transparent" press="onPersonalizationTableButtonPressed" />
+                        </OverflowToolbar>
+                    </t:extension>
+                    <t:columns>
+                        <t:Column tooltip="{i18n>labelUTNumber}"
+                            id="utNumber"
+                            width="auto" sortProperty="TUNumber"
+                            minWidth="180px">
+                            <Label text="{i18n>labelUTNumber}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUNumber}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTText}"
+                            id="utText"
+                            width="auto"
+                            sortProperty="TUText"
+                            minWidth="180px">
+                            <Label text="{i18n>labelUTText}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUText}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTType}"
+                            id="utType"
+                            width="auto"
+                            sortProperty="TUType"
+                            minWidth="180px">
+                            <Label text="{i18n>labelUTType}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUType}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVehTypeText}"
+                            id="VehTypeText"
+                            width="auto" sortProperty="VehTypeText"
+                            minWidth="180px">
+                            <Label text="{i18n>labelVehTypeText}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>VehTypeText}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTClass}"
+                            id="utClass"
+                            width="auto"
+                            sortProperty="TUClass"
+                            minWidth="180px">
+                            <Label text="{i18n>labelUTClass}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>TUClass', formatter: '.formatter.UT_setClass'}" tooltip="{path: 'UTsModel>TUClass', formatter: '.formatter.UT_setClass'}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTMode}"
+                            width="auto"
+                            minWidth="180px"
+                            sortProperty="TUMode"
+                            id="utMode">
+                            <Label text="{i18n>labelUTMode}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>TUMode', formatter: '.formatter.setTransportMode'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTStatus}"
+                            width="auto"
+                            minWidth="180px"
+                            sortProperty="TUStatus"
+                            id="utStatus">
+                            <Label text="{i18n>labelUTStatus}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>TUStatus', formatter: '.formatter.UT_setAvailabilityText'}" state="{path: 'UTsModel>TUStatus', formatter: '.formatter.UT_setAvailabilityState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCreName}"
+                            width="auto"
+                            minWidth="180px"
+                            id="utCreName"
+                            sortProperty="CreName"
+                            visible="true">
+                            <Label text="{i18n>labelUTCreName}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CreName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCreDate}"
+                            id="utCreDate"
+                            width="auto"
+                            minWidth="180px"
+                            sortProperty="CreDate"
+                            visible="true">
+                            <Label text="{i18n>labelUTCreDate}" />
+                            <t:template>
+                                <ObjectStatus text="{ path: 'UTsModel>CreDate', formatter: '.formatter.dateObjectToString' }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTModifName}"
+                            width="auto"
+                            minWidth="180px"
+                            id="utModifName"
+                            sortProperty="ModifName"
+                            visible="true">
+                            <Label text="{i18n>labelUTModifName}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ModifName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTModifDate}"
+                            id="utModifDate"
+                            width="auto"
+                            minWidth="180px"
+                            sortProperty="ModifDate"
+                            visible="true">
+                            <Label text="{i18n>labelUTModifDate}" />
+                            <t:template>
+                                <ObjectStatus text="{ path: 'UTsModel>ModifDate', formatter: '.formatter.dateObjectToString' }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTLenght}"
+                            id="utLenght"
+                            width="auto"
+                            minWidth="180px"
+                            sortProperty="TULength"
+                            visible="true">
+                            <Label text="{i18n>labelUTLenght}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TULength}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTWidth}"
+                            id="utWidth"
+                            width="auto" sortProperty="TUWidth"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTWidth}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUWidth}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTHeight}"
+                            id="utHeight"
+                            width="auto" sortProperty="TUHeight"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTHeight}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUHeight}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDimUom}"
+                            id="utDimUom"
+                            width="auto" sortProperty="DimUom"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDimUom}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>DimUom}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTUnlwgt}"
+                            id="utUnlwgt"
+                            width="auto" sortProperty="TUUnlwgt"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTUnlwgt}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUUnlwgt}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTMaxWgt}"
+                            id="utMaxWgt"
+                            width="auto" sortProperty="TUMaxwgt"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTMaxWgt}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUMaxwgt}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTWgtUom}"
+                            id="utWgtUom"
+                            width="auto" sortProperty="WgtUom"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTWgtUom}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>WgtUom}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTMaxVol}"
+                            visible="true"
+                            width="auto" sortProperty="TUMaxvol"
+                            minWidth="180px"
+                            id="utMaxVol">
+                            <Label text="{i18n>labelUTMaxVol}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUMaxvol}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTVolUom}"
+                            visible="true"
+                            width="auto" sortProperty="VolUom"
+                            minWidth="180px"
+                            id="utVolUom">
+                            <Label text="{i18n>labelUTVolUom}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>VolUom}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTAxles}"
+                            id="utAxles"
+                            width="auto" sortProperty="TUAxles"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTAxles}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUAxles}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCarrier}"
+                            id="utCarrier"
+                            width="auto" sortProperty="TUCarrier"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCarrier}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUCarrier}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTNroComps}"
+                            id="utNroComps"
+                            width="auto" sortProperty="TUNrcomps"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTNroComps}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>TUNrcomps}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber1}"
+                            id="utComNumber1"
+                            width="auto" sortProperty="ComNumber1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol1}"
+                            id="utCmpMinVol1"
+                            width="auto" sortProperty="CmpMinvol1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol1}"
+                            id="utCmpMaxvol1"
+                            width="auto" sortProperty="CmpMaxvol1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText1}"
+                            id="utComIdtext1"
+                            width="auto" sortProperty="ComIdText1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname1}"
+                            id="utGroupname1"
+                            width="auto" sortProperty="ComGroupName1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber2}"
+                            id="utComNumber2"
+                            width="auto" sortProperty="ComNumber2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol2}"
+                            id="utCmpMinVol2"
+                            width="auto" sortProperty="CmpMinvol2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol2}"
+                            id="utCmpMaxvol2"
+                            width="auto" sortProperty="CmpMaxvol2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText2}"
+                            id="utComIdtext2"
+                            width="auto" sortProperty="ComIdText2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname2}"
+                            id="utGroupname2"
+                            width="auto" sortProperty="ComGroupName2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber3}"
+                            id="utComNumber3"
+                            width="auto" sortProperty="ComNumber3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol3}"
+                            id="utCmpMinVol3"
+                            width="auto" sortProperty="CmpMinvol3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol3}"
+                            id="utCmpMaxvol3"
+                            width="auto" sortProperty="CmpMaxvol3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText3}"
+                            id="utComIdtext3"
+                            width="auto" sortProperty="ComIdText3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname3}"
+                            id="utGroupname3"
+                            width="auto" sortProperty="ComGroupName3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber4}"
+                            id="utComNumber4"
+                            width="auto" sortProperty="ComNumber4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol4}"
+                            id="utCmpMinVol4"
+                            width="auto" sortProperty="CmpMinvol4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol4}"
+                            id="utCmpMaxvol4"
+                            width="auto" sortProperty="CmpMaxvol4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText4}"
+                            id="utComIdtext4"
+                            width="auto" sortProperty="ComIdText4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname4}"
+                            id="utGroupname4"
+                            width="auto" sortProperty="ComGroupName4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber5}"
+                            id="utComNumber5"
+                            width="auto" sortProperty="ComNumber5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol5}"
+                            id="utCmpMinVol5"
+                            width="auto" sortProperty="CmpMinvol5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol5}"
+                            id="utCmpMaxvol5"
+                            width="auto" sortProperty="CmpMaxvol5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText5}"
+                            id="utComIdtext5"
+                            width="auto" sortProperty="ComIdText5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname5}"
+                            id="utGroupname5"
+                            width="auto" sortProperty="ComGroupName5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber6}"
+                            id="utComNumber6"
+                            width="auto" sortProperty="ComNumber6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol6}"
+                            id="utCmpMinVol6"
+                            width="auto" sortProperty="CmpMinvol6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol6}"
+                            id="utCmpMaxvol6"
+                            width="auto" sortProperty="CmpMaxvol6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText6}"
+                            id="utComIdtext6"
+                            width="auto" sortProperty="ComIdText6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname6}"
+                            id="utGroupname6"
+                            width="auto" sortProperty="ComGroupName6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComNumber7}"
+                            id="utComNumber7"
+                            width="auto" sortProperty="ComNumber7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComNumber7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComNumber7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMinVol7}"
+                            id="utCmpMinVol7"
+                            width="auto" sortProperty="CmpMinvol7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMinVol7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMinvol7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCmpMaxVol7}"
+                            id="utCmpMaxvol7"
+                            width="auto" sortProperty="CmpMaxvol7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCmpMaxVol7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CmpMaxvol7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTComIdText7}"
+                            id="utComIdtext7"
+                            width="auto" sortProperty="ComIdText7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTComIdText7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComIdText7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGroupname7}"
+                            id="utGroupname7"
+                            width="auto" sortProperty="ComGroupName7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGroupname7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ComGroupName7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTSegCent}"
+                            id="utSegCent"
+                            width="auto" sortProperty="SegCent"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTSegCent}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>SegCent', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>SegCent', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCompMar}"
+                            id="utCompMar"
+                            width="auto" sortProperty="CompMar"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCompMar}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CompMar}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCompMod}"
+                            id="utCompMod"
+                            width="auto" sortProperty="CompMod"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCompMod}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CompMod}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCompCh}"
+                            id="utCompCh"
+                            width="auto" sortProperty="CompCh"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCompCh}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CompCh}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCompMot}"
+                            id="utCompMot"
+                            width="auto" sortProperty="CompMot"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCompMot}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CompMot}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTProdType}"
+                            id="utProdType"
+                            width="auto" sortProperty="ProdType"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTProdType}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>ProdType}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTUsrAbm}"
+                            id="utUsrAbm"
+                            width="auto" sortProperty="UsrAbm"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTUsrAbm}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>UsrAbm', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>UsrAbm', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCargaVent}"
+                            id="utCargaVent"
+                            width="auto" sortProperty="CargaVent"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCargaVent}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>CargaVent', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>CARGA_VENT', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTOpCif}"
+                            id="utOpCif"
+                            width="auto" sortProperty="OpCif"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTOpCif}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>OpCif', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>OpCif', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTEuro5}"
+                            id="utEuro5"
+                            width="auto" sortProperty="Euro5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTEuro5}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>Euro5', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>Euro5', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTEscal}"
+                            id="utEscal"
+                            width="auto" sortProperty="Escal"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTEscal}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>Escal', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>Escal', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTPot}"
+                            id="utPot"
+                            width="auto" sortProperty="Pot"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTPot}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Pot}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTImag}"
+                            id="utImag"
+                            width="auto" sortProperty="Imag"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTImag}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>Imag', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>Imag', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTSistFren}"
+                            id="utSistFren"
+                            width="auto" sortProperty="SistFren"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTSistFren}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>SistFren}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTPrecFijo}"
+                            id="utPrecFijo"
+                            width="auto" sortProperty="PrecFijo"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTPrecFijo}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>PrecFijo', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>PrecFijo', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTPrecElect}"
+                            id="utPrecElect"
+                            width="auto" sortProperty="PrecElect"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTPrecElect}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>PrecElect', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>PrecElect', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTBombTrans}"
+                            id="utBombTrans"
+                            width="auto" sortProperty="BombTrans"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTBombTrans}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>BombTrans', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>BombTrans', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTAudtanNr}"
+                            id="utAudtanNr"
+                            width="auto" sortProperty="AudtanNr"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTAudtanNr}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>AudtanNr}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCardNum}"
+                            id="utCardNum"
+                            width="auto" sortProperty="CardNum"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCardNum}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CardNum}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCardNum2}"
+                            id="utCardNum2"
+                            width="auto" sortProperty="CardNum2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCardNum2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>CardNum2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTPropie}"
+                            id="utPropie"
+                            width="auto" sortProperty="Propie"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTPropie}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Propie}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTConfig}"
+                            id="utConfig"
+                            width="auto" sortProperty="Config"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTConfig}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Config}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTSistAda}"
+                            id="utSistAda"
+                            width="auto" sortProperty="SistAda"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTSistAda}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>SistAda', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>SistAda', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTSatelit}"
+                            id="utSatelit"
+                            width="auto" sortProperty="Satelit"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTSatelit}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>Satelit', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>Satelit', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTdetSat}"
+                            id="utdetSat"
+                            width="auto" sortProperty="detSat"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTdetSat}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>detSat}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTModelo}"
+                            id="utModelo"
+                            width="auto" sortProperty="Modelo"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTModelo}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Modelo}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTSedr}"
+                            id="utSedr"
+                            width="auto" sortProperty="Sedr"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTSedr}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>Sedr', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>Sedr', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTInv}"
+                            id="utInv"
+                            width="auto" sortProperty="Inv"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTInv}" />
+                            <t:template>
+                                <ObjectStatus text="{path: 'UTsModel>Inv', formatter: '.formatter.formatStringBooleansToText'}" state="{path: 'UTsModel>Inv', formatter: '.formatter.formatStringBooleansToState'}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTGjahr}"
+                            id="utGjahr"
+                            width="auto" sortProperty="Gjahr"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTGjahr}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Gjahr}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTBol}"
+                            id="utBol"
+                            width="auto" sortProperty="Bol"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTBol}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Bol}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTMotOp}"
+                            id="utMotOp"
+                            width="auto" sortProperty="MotOp"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTMotOp}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>MotOp}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo1}"
+                            id="utCampo"
+                            width="auto" sortProperty="Campo1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion1}"
+                            id="utDescripcion"
+                            width="auto" sortProperty="Descripcion1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion1}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion1}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTFechaDesdeItc1}"
+                            id="utFechaDesdeItc1"
+                            width="auto" sortProperty="FechaDesdeItc1"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTFechaDesdeItc1}" />
+                            <t:template>
+                                <ObjectStatus text="{ 
+                                    path: 'UTsModel>FechaDesdeItc1',
+                                    formatter: '.formatter.intDateToString'
+                                }"  class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTVtoItcRg20801}"
+                            id="utVtoItcRg20801"
+                            width="auto" sortProperty="VtoItcRg20801"
+                            minWidth="180px"
+                            visible="true">
+                            <Label  text="{i18n>labelUTVtoItcRg20801}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoItcRg20801',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo2}"
+                            id="utCampo2"
+                            width="auto" sortProperty="Campo2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion2}"
+                            id="utDescripcion2"
+                            width="auto" sortProperty="Descripcion2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion2}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion2}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTFechaDesdeItc2}"
+                            id="utFechaDesdeItc2"
+                            width="auto" sortProperty="FechaDesdeItc2"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTFechaDesdeItc2}" />
+                            <t:template>
+                                <ObjectStatus text="{ 
+                                    path: 'UTsModel>FechaDesdeItc2',
+                                    formatter: '.formatter.intDateToString'
+                                }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTVtoItcRg20802}"
+                            id="utVtoItcRg20802"
+                            width="auto" sortProperty="VtoItcRg20802"
+                            minWidth="180px"
+                            visible="true">
+                            <Label  text="{i18n>labelUTVtoItcRg20802}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoItcRg20802',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo3}"
+                            id="utCampo3"
+                            width="auto" sortProperty="Campo3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion3}"
+                            id="utDescripcion3"
+                            width="auto" sortProperty="Descripcion3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion3}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion3}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTFechaDesdeItc3}"
+                            id="utFechaDesdeItc3"
+                            width="auto" sortProperty="FechaDesdeItc3"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTFechaDesdeItc3}" />
+                            <t:template>
+                                <ObjectStatus text="{ 
+                                    path: 'UTsModel>FechaDesdeItc3',
+                                    formatter: '.formatter.intDateToString'
+                                }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTVtoItcRg20803}"
+                            id="utVtoItcRg20803"
+                            width="auto" sortProperty="VtoItcRg20803"
+                            minWidth="180px"
+                            visible="true">
+                            <Label  text="{i18n>labelUTVtoItcRg20803}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoItcRg20803',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo4}"
+                            id="utCampo4"
+                            width="auto" sortProperty="Campo4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion4}"
+                            id="utDescripcion4"
+                            width="auto" sortProperty="Descripcion4"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion4}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion4}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoCargGral}"
+                            id="utVtoCargGral"
+                            width="auto" sortProperty="VtoCargGral"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoCargGral}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoCargGral',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo5}"
+                            id="utCampo5"
+                            width="auto" sortProperty="Campo5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion5}"
+                            id="utDescripcion5"
+                            width="auto" sortProperty="Descripcion5"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion5}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion5}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoCargPel}"
+                            id="utVtoCargPel"
+                            width="auto" sortProperty="VtoCargPel"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoCargPel}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoCargPel',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo6}"
+                            id="utCampo6"
+                            width="auto" sortProperty="Campo6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion6}"
+                            id="utDescripcion6"
+                            width="auto" sortProperty="Descripcion6"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion6}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion6}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoMas}"
+                            id="utVtoMas"
+                            width="auto" sortProperty="VtoMas"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoMas}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoMas',
+                                    formatter: '.formatter.intDateToString'
+                                }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo7}"
+                            id="utCampo7"
+                            width="auto" sortProperty="Campo7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion7}"
+                            id="utDescripcion7"
+                            width="auto" sortProperty="Descripcion7"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion7}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion7}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoSeg}"
+                            id="utVtoSeg"
+                            width="auto" sortProperty="VtoSeg"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoSeg}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoSeg',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo8}"
+                            id="utCampo8"
+                            width="auto" sortProperty="Campo8"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo8}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo8}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion8}"
+                            id="utDescripcion8"
+                            width="auto" sortProperty="Descripcion8"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion8}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion8}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoSegCarg}"
+                            id="utVtoSegCarg"
+                            width="auto" sortProperty="VtoSegCarg"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoSegCarg}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoSegCarg',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo9}"
+                            id="utCampo9"
+                            width="auto" sortProperty="Campo9"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo9}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo9}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion9}"
+                            id="utDescripcion9"
+                            width="auto" sortProperty="Descripcion9"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion9}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion9}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoRuta}"
+                            id="utVtoRuta"
+                            width="auto" sortProperty="VtoRuta"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoRuta}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoRuta',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo10}"
+                            id="utCampo10"
+                            width="auto" sortProperty="Campo10"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo10}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo10}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion10}"
+                            id="utDescripcion10"
+                            width="auto" sortProperty="Descripcion10"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion10}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion10}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoPrqTq}"
+                            id="utVtoPrqTq"
+                            width="auto" sortProperty="VtoPrqTq"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoPrqTq}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoPrqTq',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo11}"
+                            id="utCampo11"
+                            width="auto" sortProperty="Campo11"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo11}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo11}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion11}"
+                            id="utDescripcion11"
+                            width="auto" sortProperty="Descripcion11"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion11}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion11}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoValAliv}"
+                            id="utVtoValAliv"
+                            width="auto" sortProperty="VtoValAliv"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoValAliv}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoValAliv',
+                                    formatter: '.formatter.intDateToString'
+                                }"
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo12}"
+                            id="utCampo12"
+                            width="auto" sortProperty="Campo12"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo12}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo12}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion12}"
+                            id="utDescripcion12"
+                            width="auto" sortProperty="Descripcion12"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion12}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion12}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoHidrMang}"
+                            id="utVtoHidrMang"
+                            width="auto" sortProperty="VtoHidrMang"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoHidrMang}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoHidrMang',
+                                    formatter: '.formatter.intDateToString'
+                                }" 
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo13}"
+                            id="utCampo13"
+                            width="auto" sortProperty="Campo13"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo13}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo13}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion13}"
+                            id="utDescripcion13"
+                            width="auto" sortProperty="Descripcion13"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion13}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion13}" 
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoValExf}"
+                            id="utVtoValExf"
+                            width="auto" sortProperty="VtoValExf"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoValExf}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoValExf',
+                                    formatter: '.formatter.intDateToString'
+                                }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo14}"
+                            id="utCampo14"
+                            width="auto" sortProperty="Campo14"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo14}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo14}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion14}"
+                            id="utDescripcion14"
+                            width="auto" sortProperty="Descripcion14"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion14}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion14}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoEstEsp}"
+                            id="utVtoEstEsp"
+                            width="auto" sortProperty="VtoEstEsp"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoEstEsp}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoEstEsp',
+                                    formatter: '.formatter.intDateToString'
+                                }" 
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo15}"
+                            id="utCampo15"
+                            width="auto" sortProperty="Campo15"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo15}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo15}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion15}"
+                            id="utDescripcion15"
+                            width="auto" sortProperty="Descripcion15"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion15}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion15}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoInspInt}"
+                            id="utVtoInspInt"
+                            width="auto" sortProperty="VtoInspInt"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoInspInt}" />
+                            <t:template>
+                                <ObjectStatus 
+                                text="{ 
+                                    path: 'UTsModel>VtoInspInt',
+                                    formatter: '.formatter.intDateToString'
+                                }" 
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo16}"
+                            id="utCampo16"
+                            width="auto" sortProperty="Campo16"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo16}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo16}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion16}"
+                            id="utDescripcion16"
+                            width="auto" sortProperty="Descripcion16"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion16}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion16}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoInspExt}"
+                            id="utVtoInspExt"
+                            width="auto" sortProperty="VtoInspExt"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoInspExt}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoInspExt',
+                                    formatter: '.formatter.intDateToString'
+                                }" 
+                                class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTCampo17}"
+                            id="utCampo17"
+                            width="auto" sortProperty="Campo17"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTCampo17}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Campo17}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelUTDescripcion17}"
+                            id="utDescripcion17"
+                            width="auto" sortProperty="Descripcion17"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelUTDescripcion17}" />
+                            <t:template>
+                                <ObjectStatus text="{UTsModel>Descripcion17}" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column tooltip="{i18n>labelVtoModUn}"
+                            id="utVtoModUn"
+                            width="auto" sortProperty="VtoModUn"
+                            minWidth="180px"
+                            visible="true">
+                            <Label text="{i18n>labelVtoModUn}" />
+                            <t:template>
+                                <ObjectStatus
+                                text="{ 
+                                    path: 'UTsModel>VtoModUn',
+                                    formatter: '.formatter.intDateToString'
+                                }" class="sapMObjectStatusMedium"/>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </content>
+        </IconTabBar>
+        </f:content>
+        <f:footer>
+        </f:footer>
+    </f:DynamicPage>    
+</mvc:View>

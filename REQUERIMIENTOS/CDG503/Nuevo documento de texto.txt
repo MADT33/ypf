@@ -1,0 +1,2 @@
+W =LM4K900619       RY35380      S 7000004884:  CDG F2 - CDG.503 - Carga de part Ind PA
+cust =LM4K900621 200   RY35380      S 7000004884:  CDG F2 - CDG.503 - Carga de part Ind PA

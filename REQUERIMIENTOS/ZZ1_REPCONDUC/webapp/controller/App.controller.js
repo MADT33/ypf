@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("ypf.zlog12freeld4.controller.App",{onInit:function(){}})});

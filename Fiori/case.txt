@@ -1,0 +1,152 @@
+                var Num_Transporte = new sap.ui.model.Filter({
+                    path: "Num_Transporte",
+                    operator: sap.ui.model.FilterOperator.EQ,
+                    value1: "1200"
+                });
+                var Posicion = new sap.ui.model.Filter({
+                    path: "Posicion",
+                    operator: sap.ui.model.FilterOperator.EQ,
+                    value1: "1"
+                });
+
+                oFilter.push(Num_Transporte, Posicion);
+
+                var oTable = this.getView().byId("table1");
+                var oModel = this.getView().getModel("Procesos").getData();
+                var oDataModel = this.getOwnerComponent().getModel();
+
+                switch (sPath) {
+                    case '/0':
+
+                        oDataModel.read("/BQ_PesadaInicialSet", {
+                            filters: oFilter,
+                            success: function (oData, oResponse) {
+                                var estado = oResponse.data.results[0].Estado;
+                                var oModel = that.getView().getModel("Procesos").getData();
+                                console.log(estado);
+
+                                if (estado == "OKEY") {
+                                    for (var i = 0; i < oModel.length; i++) {
+                                        oModel[0].status = "Recibido"
+                                        var obj1 = {};
+                                        obj1.proceso = "Ifix Inicial";
+                                        obj1.status = "Pendiente";
+                                    }
+                                    oModel.push(obj1);
+                                    that.getView().byId("table1").getModel("Procesos").refresh(true);
+                                }
+
+                            },
+                            error: function (oError) {
+                                console.log(oError)
+                            }
+                        });
+
+                        break;
+
+                    case '/1':
+
+                        oDataModel.read("/BQ_Ifix_InicialSet", {
+                            filters: oFilter,
+                            success: function (oData, oResponse) {
+                                var estado = oResponse.data.results[0].Estado;
+                                var oModel = that.getView().getModel("Procesos").getData();
+                                console.log(estado);
+
+                                if (estado == "OKEY") {
+                                    for (var i = 0; i < oModel.length; i++) {
+                                        oModel[1].status = "Recibido"
+                                        var obj2 = {};
+                                        obj2.proceso = "Ifix Final";
+                                        obj2.status = "Pendiente";
+                                    }
+                                    oModel.push(obj2);
+                                    that.getView().byId("table1").getModel("Procesos").refresh(true);
+                                }
+
+                            },
+                            error: function (oError) {
+                                console.log(oError)
+                            }
+                        });
+                        break;
+
+                    case '/2':
+
+                        oDataModel.read("/BQ_Ifix_FinalSet", {
+                            filters: oFilter,
+                            success: function (oData, oResponse) {
+                                var estado = oResponse.data.results[0].Estado;
+                                var oModel = that.getView().getModel("Procesos").getData();
+                                console.log(estado);
+
+                                if (estado == "OKEY") {
+                                    for (var i = 0; i < oModel.length; i++) {
+                                        oModel[2].status = "Recibido"
+                                        var obj3 = {};
+                                        obj3.proceso = "Pesada Final";
+                                        obj3.status = "Pendiente";
+                                    }
+                                    oModel.push(obj3);
+                                    that.getView().byId("table1").getModel("Procesos").refresh(true);
+                                }
+
+                            },
+                            error: function (oError) {
+                                console.log(oError)
+                            }
+                        });
+                        break;
+
+                    case '/3':
+
+                        oDataModel.read("/BQ_PesadaFinalSet", {
+                            filters: oFilter,
+                            success: function (oData, oResponse) {
+                                var estado = oResponse.data.results[0].Estado;
+                                var oModel = that.getView().getModel("Procesos").getData();
+                                console.log(estado);
+
+                                if (estado == "OKEY") {
+                                    for (var i = 0; i < oModel.length; i++) {
+                                        oModel[3].status = "Recibido"
+                                        var obj4 = {};
+                                        obj4.proceso = "Cierre de Viaje";
+                                        obj4.status = "Pendiente";
+                                    }
+                                    oModel.push(obj4);
+                                    that.getView().byId("table1").getModel("Procesos").refresh(true);
+                                }
+
+                            },
+                            error: function (oError) {
+                                console.log(oError)
+                            }
+                        });
+                        break;
+
+                    case '/4':
+                        oDataModel.read("/Cierre_de_ViajeSet", {
+                            filters: oFilter,
+                            success: function (oData, oResponse) {
+                                var estado = oResponse.data.results[0].Estado;
+                                var oModel = that.getView().getModel("Procesos").getData();
+                                console.log(estado);
+
+                                if (estado == "OKEY") {
+                                    for (var i = 0; i < oModel.length; i++) {
+                                        oModel[4].status = "Recibido"
+                                    }
+                                    that.getView().byId("table1").getModel("Procesos").refresh(true);
+                                    sap.m.MessageToast.show("Proceso terminado con exito!");
+                                }
+
+                            },
+                            error: function (oError) {
+                                console.log(oError)
+                            }
+                        });
+                        break;
+
+                    default:
+                }

@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		id="sortDialog"
+		confirm="onSortUtTableConfirm">
+		<sortItems>
+			<ViewSettingsItem text="{i18n>labelUTNumber}" key="{i18n>idTUNumber}" selected="true"  />
+			<!-- <ViewSettingsItem text="Fecha De Envio" key="FechaEnvio" /> -->
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

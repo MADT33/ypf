@@ -1,0 +1,95 @@
+<mvc:View
+    controllerName="ypf.zlog12freeld4.controller.DriverDetail"
+    xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:u="sap.uxap"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+	xmlns:card="sap.f.cards"
+	displayBlock="true"
+	height="100%">
+    <u:ObjectPageLayout>    
+		<u:headerTitle>
+			<u:ObjectPageDynamicHeaderTitle>
+				<u:expandedHeading>
+					<Title text="{i18n>DriverDetailTitle}" wrapping="true" />
+				</u:expandedHeading>
+				<u:snappedHeading>
+					<HBox>
+                        <VBox>
+							<Avatar src="{i18n>iconDriver}" class=""/>
+						</VBox>
+						<VBox>
+                            <Title text="{i18n>DriverDetailTitle}" wrapping="true"/>
+                            <ObjectStatus text="{i18n>labelDriverCode}: {DriverModel>/DriverCode}"/>
+                        </VBox>
+                    </HBox>
+				</u:snappedHeading>
+				<u:expandedContent>
+                    <ObjectStatus text="{i18n>labelDriverCode}: {DriverModel>/DriverCode}"/>
+				</u:expandedContent>
+				<u:snappedTitleOnMobile>
+					<Title text="{i18n>DriverDetailTitle} {DriverModel>/DriverCode}"/>
+				</u:snappedTitleOnMobile>
+				<u:actions>
+					<u:ObjectPageHeaderActionButton icon="sap-icon://nav-back" type="Transparent" press="onNavToTablesView"/>
+				</u:actions>
+			</u:ObjectPageDynamicHeaderTitle>
+		</u:headerTitle> 
+		<u:headerContent>
+            <HBox justifyContent="SpaceBetween" >
+				<Avatar src="{i18n>iconDriver}" class="sapUiMediumMarginEnd sapUiSmallMarginBottom sapUiSmallMarginBegin sapUiSmallMarginTop" displaySize="XL"/>
+				
+				<VBox width="24%" class="sapUiTinyMarginEnd sapUiLargeMarginTop">
+					<!-- <ObjectStatus text="Tipo de vehículo" class="sapMObjectStatusLarge"/> -->
+					<Label text="{i18n>DriverNameLabel}" />
+					<ObjectStatus text="{DriverModel>/FirstName} {DriverModel>/LastName}" class="sapMObjectStatusLarge"/>
+				</VBox>
+				<VBox width="20%" class="sapUiTinyMarginEnd sapUiLargeMarginTop">
+                    <!-- <ObjectStatus text="Status" class="sapMObjectStatusLarge"/> -->
+                    <Label text="{i18n>labelDriverDriverStatus}" />
+                    <ObjectStatus text="{path: 'DriverModel>/DriverStatus', formatter: '.formatter.formatDriverStatusToText'}" state="{path: 'DriverModel>/DriverStatus', formatter: '.formatter.formatDriverStatusToState'}" class="sapMObjectStatusLarge"/>
+				</VBox>
+				<VBox width="25%" class="sapUiSmallMarginEnd sapUiLargeMarginTop" >
+                    <!-- <ObjectStatus class="sapMObjectStatusLarge" text="Modo de Transporte" /> -->
+                    <Label text="{i18n>labelDriverPersCode}"/>
+					<ObjectStatus text="{DriverModel>/PersCode}" state="Information" class="sapMObjectStatusLarge" /> 
+				</VBox>
+				<VBox  width="21%" class="sapUiTinyMarginEnd sapUiLargeMarginTop">
+                    <!-- <ObjectStatus class="sapMObjectStatusLarge" text="Identificador" /> -->
+                    <ObjectStatus text="{i18n>labelDriverCarrier}" />
+					<ObjectStatus text="{DriverModel>/Carrier}" state="Information" class="sapMObjectStatusLarge" />
+				</VBox>
+			</HBox>
+		</u:headerContent>
+		<u:sections>
+            <u:ObjectPageSection>
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>DriverSubSection1Title}" titleUppercase="false">
+                        <f:Card class="" width="40rem" height="100%" >
+								<f:header>
+									<card:Header iconSrc="{i18n>LicenceCardIcon}" title="{i18n>LicenceCardTitle}" />
+								</f:header>
+								<f:content>
+									    <List
+											items="{DriverModel>/Licencias}"
+											showSeparators="None">
+											<ObjectListItem
+												title="{DriverModel>labelLicenseTxt}: {DriverModel>LicenseTxt}"
+                                                number="{DriverModel>labelLicenseType}: {DriverModel>LicenseType}">
+												<firstStatus>
+													<ObjectStatus text="{DriverModel>labelValidTo}: {path: 'DriverModel>ValidTo', formatter: '.formatter.intDateToString'}" /> 
+												</firstStatus>
+												<ObjectAttribute text="{DriverModel>labelValidFrom}: {path: 'DriverModel>ValidFrom', formatter: '.formatter.intDateToString'}" />
+												  
+											</ObjectListItem>
+										</List>
+								</f:content>
+							</f:Card>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+            </u:ObjectPageSection>
+		</u:sections>
+	</u:ObjectPageLayout> 
+</mvc:View>

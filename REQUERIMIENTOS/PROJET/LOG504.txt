@@ -1,0 +1,3 @@
+ZNUM_PRECINTOS
+
+Actualización de rangos de Precintos

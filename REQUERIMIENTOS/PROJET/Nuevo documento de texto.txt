@@ -1,0 +1,20 @@
+<Table id="id-table" growing="true" growingScrollToLoad="true" growingThreshold="3000" items="{LogModel>/}" >
+		<columns>
+			<Column>
+				<Label text="{i18n>Material}"/>
+			</Column>
+			<Column>
+				<Label text="{i18n>Mensaje}"/>
+			</Column>
+			
+		</columns>
+		<items>
+			<ColumnListItem type="Active">
+				<cells>
+					<Text text="{LogModel>Material}"/>
+					<Text text="{LogModel>Mensaje}"/>
+
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>

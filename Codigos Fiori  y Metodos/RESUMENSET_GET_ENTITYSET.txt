@@ -1,0 +1,143 @@
+ METHOD resumenset_get_entityset.
+    DATA:
+      ls_entity  LIKE LINE OF et_entityset,
+      ls_resumen TYPE /iwbep/s_cod_select_option.
+
+    TYPES: BEGIN OF tabla,
+             fechadesde TYPE string,
+             fechahasta TYPE string,
+             pdf_nombre TYPE string,
+           END OF tabla.
+
+    DATA : it_tabla TYPE TABLE OF tabla,
+           ls_tabla LIKE LINE OF it_tabla.
+
+
+    DATA: lv_search_string TYPE string.
+    lv_search_string = io_tech_request_context->get_search_string( ).
+
+
+    DATA(lo_filter)   = io_tech_request_context->get_filter( ).
+
+    IF lo_filter IS BOUND.
+      DATA(lt_filters)  = lo_filter->get_filter_select_options( ).
+
+
+      LOOP AT lt_filters INTO DATA(ls_filters).
+
+        CASE ls_filters-property.
+
+          WHEN 'FECHA_DESDE'.
+            LOOP AT ls_filters-select_options INTO ls_resumen.
+              LS_tabla-fechadesde = ls_resumen-low .
+            ENDLOOP.
+
+          WHEN 'FECHA_HASTA'.
+            LOOP AT ls_filters-select_options INTO ls_resumen.
+              LS_tabla-fechahasta  = ls_resumen-low.
+            ENDLOOP.
+
+          WHEN 'PDF_NOMBRE'.
+            LOOP AT ls_filters-select_options INTO ls_resumen.
+              LS_tabla-pdf_nombre = ls_resumen-low .
+            ENDLOOP.
+
+        ENDCASE.
+
+      ENDLOOP.
+
+
+      DATA : it_return        TYPE zoac050_tt_yerstatements,
+             ls_return        LIKE LINE OF it_return,
+             fecha_desde_date TYPE dats,
+             fecha_hasta_date TYPE dats,
+             lv_fecha type sy-datum,
+             lv_fecha2 type sy-datum.
+
+      fecha_desde_date =  LS_tabla-fechadesde.
+      fecha_hasta_date =  LS_tabla-fechahasta.
+
+      DATA: lv_base64_encode TYPE string.
+
+
+
+      CALL FUNCTION 'ZOAC050_F_YERSTATEMENTS'
+        EXPORTING
+          pi_desde          = fecha_desde_date
+          pi_hasta          = fecha_hasta_date
+        IMPORTING
+          po_yer_statements = it_return.
+
+
+
+
+      IF  LS_tabla-pdf_nombre IS NOT INITIAL.
+
+
+        READ TABLE it_return
+              WITH KEY pdf_nombre = LS_tabla-pdf_nombre
+              INTO ls_return.
+
+
+        CALL FUNCTION 'SCMS_BASE64_ENCODE_STR'
+          EXPORTING
+            input  = ls_return-pdf_data
+          IMPORTING
+            output = lv_base64_encode.
+
+        ls_entity-pdf_data =   lv_base64_encode .
+
+
+        APPEND ls_entity TO et_entityset.
+
+      ELSE.
+
+        LOOP AT it_return INTO  ls_return.
+
+          ls_entity-enviado_pdc =  ls_return-enviado_pdc.
+          lv_fecha    =   ls_return-emision.
+          ls_entity-enviado_control = ls_return-enviado_control.
+          ls_entity-emitido   =    ls_return-emitido.
+          ls_entity-doc_sellos =  ls_return-doc_sellos.
+          ls_entity-fecha_sellos = ls_return-fecha_sellos.
+          lv_fecha2   = ls_return-vencimiento.
+          ls_entity-solicitante = ls_return-solicitante.
+          ls_entity-periodo = ls_return-periodo.
+          ls_entity-contrato = ls_return-contrato.
+          ls_entity-destinatario = ls_return-destinatario.
+          ls_entity-status = ls_return-status.
+          ls_entity-pdf_nombre =  ls_return-pdf_nombre.
+
+          CALL FUNCTION 'SCMS_BASE64_ENCODE_STR'
+            EXPORTING
+              input  = ls_return-pdf_data
+            IMPORTING
+              output = lv_base64_encode.
+
+          ls_entity-pdf_data =   lv_base64_encode .
+
+
+
+
+          CONCATENATE lv_fecha+6(2) '/' lv_fecha+4(2) '/' lv_fecha(4) INTO ls_entity-emision.
+           CONCATENATE lv_fecha2+6(2) '/' lv_fecha2+4(2) '/' lv_fecha2(4) INTO ls_entity-vencimiento.
+
+
+
+
+
+
+
+
+          APPEND ls_entity TO et_entityset.
+        ENDLOOP.
+
+
+
+
+      ENDIF.
+
+    ENDIF.
+
+
+  ENDMETHOD.

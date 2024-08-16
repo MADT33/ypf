@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/test/Opa5"],function(t){"use strict";return t.extend("ypf.zlog66freeld4.test.integration.arrangements.Startup",{iStartMyApp:function(t){var e=t||{};e.delay=e.delay||50;this.iStartMyUIComponent({componentConfig:{name:"ypf.zlog66freeld4",async:true},hash:e.hash,autoWait:e.autoWait})}})});
